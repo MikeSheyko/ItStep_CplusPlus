@@ -63,7 +63,7 @@ int main()
 	{
 		cout << "There are no positive numbers among these" << endl;
 	}
-	cout << endl;*/
+	cout << endl;
 
 
 	cout << "Task 4" << endl;

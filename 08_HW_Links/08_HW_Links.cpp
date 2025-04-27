@@ -39,11 +39,11 @@ void ReplaceNegElement(int* arr, int size)
 }
 
 //Task 3
-void Swap(int* a, int* b) 
+void Swap(int& a, int& b) 
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+    int temp = a;
+    a = b;
+    b = temp;
 }
 
 int main()
@@ -104,7 +104,7 @@ int main()
 
     for (int i = 0; i < row; i++) 
     {
-        Swap(&Arr[i][0], &Arr[i][1]); 
+        Swap(Arr[i][0], Arr[i][1]); 
     }
 
     cout << endl;

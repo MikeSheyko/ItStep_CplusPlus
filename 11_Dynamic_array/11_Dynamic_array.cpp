@@ -154,7 +154,7 @@ int main()
 		
 		else
 		{
-			setColor(13);
+			setColor(14);
 			cout << "Error! Invalid choice! Try again!";
 			setColor(7);
 		}

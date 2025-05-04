@@ -93,6 +93,18 @@ int* DeleteByPosition(int* arr, int* size, int pos)
 	return temp;
 }
 
+int* DeleteFirstElement(int* arr, int* size)
+{
+	(*size)--;
+	int* temp = new int[*size];
+	for (int i = 0; i < *size; i++)
+	{
+		temp[i] = arr[i + 1];
+	}
+	delete[] arr;
+	return temp;
+}
+
 
 int main()
 {
@@ -111,11 +123,12 @@ int main()
 	while (true)
 	{
 		setColor(8);
-		cout << "\nChoose an action:\n";
-		cout << "a - Add number in array by position\n";
-		cout << "d - Delete last element in array\n";
-		cout << "r - Delete element in array by position\n";
-		cout << "e - Exit\n";
+		cout << "\tChoose an action:\t" << endl;
+		cout << "a - Add number in array by position" << endl;
+		cout << "d - Delete last element in array" << endl;
+		cout << "r - Delete element in array by position" << endl;
+		cout << "f - Delete first element in array" << endl;
+		cout << "e - Exit" << endl;
 		choice = _getch();
 		cout << endl;
 		setColor(7);
@@ -150,6 +163,16 @@ int main()
 			ShowArr(arr, size);
 			setColor(7);
 		}
+
+		else if (choice == 'f')
+		{
+			setColor(2);
+			arr = DeleteFirstElement(arr, &size);
+			cout << "New array: ";
+			ShowArr(arr, size);
+			setColor(7);
+		}
+
 		else if (choice == 'e')break;
 		
 		else

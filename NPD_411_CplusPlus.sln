@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07_HW_Pointers", "07_HW_Poi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07_HW_Pointers_Ver2", "07_HW_Pointers_Ver2\07_HW_Pointers_Ver2.vcxproj", "{56F59789-A7F4-4788-9CC5-60200AE718AF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11_Dynamic_array", "11_Dynamic_array\11_Dynamic_array.vcxproj", "{217CD7C7-E7FF-457B-B945-C38561C3790C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -151,6 +153,14 @@ Global
 		{56F59789-A7F4-4788-9CC5-60200AE718AF}.Release|x64.Build.0 = Release|x64
 		{56F59789-A7F4-4788-9CC5-60200AE718AF}.Release|x86.ActiveCfg = Release|Win32
 		{56F59789-A7F4-4788-9CC5-60200AE718AF}.Release|x86.Build.0 = Release|Win32
+		{217CD7C7-E7FF-457B-B945-C38561C3790C}.Debug|x64.ActiveCfg = Debug|x64
+		{217CD7C7-E7FF-457B-B945-C38561C3790C}.Debug|x64.Build.0 = Debug|x64
+		{217CD7C7-E7FF-457B-B945-C38561C3790C}.Debug|x86.ActiveCfg = Debug|Win32
+		{217CD7C7-E7FF-457B-B945-C38561C3790C}.Debug|x86.Build.0 = Debug|Win32
+		{217CD7C7-E7FF-457B-B945-C38561C3790C}.Release|x64.ActiveCfg = Release|x64
+		{217CD7C7-E7FF-457B-B945-C38561C3790C}.Release|x64.Build.0 = Release|x64
+		{217CD7C7-E7FF-457B-B945-C38561C3790C}.Release|x86.ActiveCfg = Release|Win32
+		{217CD7C7-E7FF-457B-B945-C38561C3790C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

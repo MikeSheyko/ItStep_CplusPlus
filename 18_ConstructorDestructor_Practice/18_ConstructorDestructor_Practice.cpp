@@ -87,6 +87,12 @@ public:
         position.y = 30;
 
     }
+    void move(int deltaX, int deltaY) 
+    {
+        position.x += deltaX;
+        position.y += deltaY;
+    }
+
 
     void setPosition(int x, int y)
     {
@@ -125,7 +131,8 @@ int main()
     rect3.print();
     cout << "----------------------------" << endl;
 
-	cout << "Changing position of rectangle" << endl;
+
+	    cout << "Changing position of rectangle" << endl;
     rect3.setPosition(40, 40);
     rect3.print();
     cout << "----------------------------" << endl;

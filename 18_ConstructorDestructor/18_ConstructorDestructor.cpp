@@ -252,11 +252,19 @@ int main()
 		"+380961478965", "Rivne", "Ukraine", "NYVGP", "Rivne", "Ukraine", "PD111");
 	st3.Print();
 
+
+	cout << "------------ Copy student----------------" << endl;
+	Student copy(st2); //copy constructor
+	copy.Print();
+
+
+
 	
 	student.Delete();
 	st1.Delete();
 	st2.Delete();
 	st3.Delete();
 
+	 
 
 }

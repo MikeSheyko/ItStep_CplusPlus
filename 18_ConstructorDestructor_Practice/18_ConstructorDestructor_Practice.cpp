@@ -25,7 +25,7 @@ public:
         height = 5;
         symbol = '*';
         position.x = 0;
-        position.y = 1;
+        position.y = 0;
     }
 
     NewRectangle(int size)
@@ -35,7 +35,7 @@ public:
         height = size;
         symbol = '*';
         position.x = 0;
-        position.y = 10;
+        position.y = 0;
         if (width <= 0 || height <= 0)
         {
             cout << "Error! Size (Width and height) must be positive!" << endl;
@@ -50,7 +50,7 @@ public:
         height = h;
         symbol = '*';
         position.x = 0;
-        position.y = 20;
+        position.y = 0;
         if (width <= 0 || height <= 0)
         {
             cout << "Error! Size (Width and height) must be positive!" << endl;
@@ -61,10 +61,11 @@ public:
 
     void print()
     {
-        setPosition(position.x, position.y);
-
+        Sleep(2000);
+        system("cls");
         for (int i = 0; i < height; ++i)
         {
+            setPosition(position.x, position.y + i);
             for (int j = 0; j < width; ++j)
             {
                 cout << symbol;
@@ -84,7 +85,7 @@ public:
         height = newHeight;
         width = newWidth;
         position.x = 0;
-        position.y = 30;
+        position.y = 0;
 
     }
     void move(int deltaX, int deltaY) 
@@ -96,9 +97,7 @@ public:
 
     void setPosition(int x, int y)
     {
-        position.x = x;
-        position.y = y;
-
+        
         COORD coord;
         coord.X = x; // колонка
         coord.Y = y; // рядок
@@ -115,25 +114,25 @@ int main()
     rect1.print();
     cout << "----------------------------" << endl;
 
-    
+
     NewRectangle rect2(7);
     rect2.print();
     cout << "----------------------------" << endl;
 
-    
+
     NewRectangle rect3(5, 3);
     rect3.print();
     cout << "----------------------------" << endl;
 
-    
-	cout << "Changing size of rectangle 3 to 8x6" << endl;
+
+    cout << "Changing size of rectangle 3 to 8x6" << endl;
     rect3.NewSize(8, 6);
     rect3.print();
     cout << "----------------------------" << endl;
 
 
-	    cout << "Changing position of rectangle" << endl;
-    rect3.setPosition(40, 40);
+    cout << "Changing position of rectangle" << endl;
+    rect3.move(20, 20);
     rect3.print();
     cout << "----------------------------" << endl;
 

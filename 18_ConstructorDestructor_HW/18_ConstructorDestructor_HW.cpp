@@ -1,214 +1,352 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <windows.h>
 using namespace std;
+
+void setColor(int color)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
 
 class Array 
 {
 private:
-    long* arr;
-    int size;
-
+    long* _arr;
+    int _size;
 public:
-	// Default constructor
-	Array() : arr(nullptr), size(0) {} // Пряма ініціалізація конструктора
-
-	// Parametrized constructor
-    Array(int n) : size(n) 
+    Array() 
     {
-        arr = new long[size];
-        for (int i = 0; i < size; i++) 
-        {
-            arr[i] = 0;
-        }
+        _size = 1;
+        _arr = new long[_size];
+        _arr[0] = 0;
     }
 
-    // Конструктор копіювання
-    Array(const Array& other) : size(other.size) 
+    explicit Array(int n) 
     {
-        arr = new long[size];
-        for (int i = 0; i < size; i++) 
+        while (n <= 0) 
         {
-            arr[i] = other.arr[i];
+            cout << "Error! Size could not be nagative or 0. Please enter size again: ";
+            cin >> n;
+        }
+        _size = n;
+        _arr = new long[_size];
+        for (int i = 0; i < _size; ++i) 
+        {
+            _arr[i] = 0;
         }
     }
 
-    // Деструктор
-    ~Array() {
-        delete[] arr;  // Звільняємо пам'ять, виділену для масиву
-    }
-
-    // Функція для заповнення масиву випадковими числами
-    void fillRandom() {
-        if (size == 0) {
-            cout << "Масив порожній, не можна заповнити випадковими значеннями.\n";
-            return;
-        }
-        srand(time(0));  // Ініціалізація генератора випадкових чисел
-        for (int i = 0; i < size; i++) {
-            arr[i] = rand() % 100 + 1;  // Випадкові числа від 1 до 100
+    Array(const Array& other) 
+    {
+        _size = other._size;
+        _arr = new long[_size];
+        for (int i = 0; i < _size; ++i) 
+        {
+            _arr[i] = other._arr[i];
         }
     }
 
-    // Функція для заповнення масиву вручну (через клавіатуру)
+    ~Array() 
+    {
+        delete[] _arr;
+    }
+
     void fillFromInput() {
-        if (size == 0) {
-            cout << "Масив порожній, не можна заповнити значеннями.\n";
-            return;
-        }
-        cout << "Введіть " << size << " елементів масиву:\n";
-        for (int i = 0; i < size; i++) {
-            cin >> arr[i];
+        for (int i = 0; i < _size; ++i) 
+        {
+            cout << "Enter values[" << i << "]: ";
+            cin >> _arr[i];
         }
     }
 
-    // Функція для відображення вмісту масиву
-    void display() const {
-        if (size == 0) {
-            cout << "Масив порожній.\n";
+    void fillRandom(int min = 0, int max = 100) 
+    {
+        srand(time(0));
+        for (int i = 0; i < _size; ++i) 
+        {
+            _arr[i] = min + rand() % (max - min + 1);
+        }
+    }
+
+    void print() const 
+    {
+        if (_size == 0) 
+        {
+            cout << "Array is empty!" << endl;
             return;
         }
-        cout << "Масив: ";
-        for (int i = 0; i < size; i++) {
-            cout << arr[i] << " ";
+        for (int i = 0; i < _size; ++i) 
+        {
+            cout << _arr[i] << " ";
         }
         cout << endl;
     }
 
-    // Функція для додавання елемента в кінець масиву
-    void addElement(long value) {
-        long* temp = new long[size + 1];  // Створюємо новий масив на 1 елемент більший
-        for (int i = 0; i < size; i++) {
-            temp[i] = arr[i];  // Копіюємо старі елементи в новий масив
+    void addNewValue(long value) 
+    {
+        long* newArr = new long[_size + 1];
+        for (int i = 0; i < _size; ++i) 
+        {
+            newArr[i] = _arr[i];
         }
-        temp[size] = value;  // Додаємо новий елемент
-        delete[] arr;  // Звільняємо стару пам'ять
-        arr = temp;  // Вказуємо на новий масив
-        size++;  // Збільшуємо розмір
+        newArr[_size] = value;
+        delete[] _arr;
+        _arr = newArr;
+        _size++;
     }
 
-    // Функція для видалення елемента з масиву за індексом
-    void removeElementByIndex(int index) {
-        if (index < 0 || index >= size) {
-            cout << "Невірний індекс.\n";
+    void removeByIndex(int index) 
+    {
+        if (index < 0 || index >= _size) 
+        {
+            cout << "Error! Invalid index or index is out of range!" << endl;
             return;
         }
-        long* temp = new long[size - 1];  // Створюємо новий масив на 1 елемент менший
-        for (int i = 0, j = 0; i < size; i++) {
-            if (i != index) {
-                temp[j++] = arr[i];  // Копіюємо елементи, пропускаючи видалений
+        if (_size == 1) 
+        {
+            delete[] _arr;
+            _arr = nullptr;
+            _size = 0;
+            return;
+        }
+        long* newArr = new long[_size - 1];
+        for (int i = 0, j = 0; i < _size; ++i) 
+        {
+            if (i != index) 
+            {
+                newArr[j++] = _arr[i];
             }
         }
-        delete[] arr;  // Звільняємо стару пам'ять
-        arr = temp;  // Вказуємо на новий масив
-        size--;  // Зменшуємо розмір
+        delete[] _arr;
+        _arr = newArr;
+        _size--;
     }
 
-    // Функція для видалення елемента за значенням
-    void removeElementByValue(long value) {
+    void removeByValue(long value) 
+    {
         int index = -1;
-        for (int i = 0; i < size; i++) {
-            if (arr[i] == value) {
+        for (int i = 0; i < _size; ++i) 
+        {
+            if (_arr[i] == value) 
+            {
                 index = i;
                 break;
             }
         }
-        if (index == -1) {
-            cout << "Елемент не знайдений.\n";
-            return;
+        if (index == -1) 
+        {
+            cout << "Value not found." << endl;
         }
-        removeElementByIndex(index);  // Викликаємо функцію для видалення за індексом
+        else 
+        {
+            removeByIndex(index);
+        }
     }
 
-    // Функція для сортування масиву по зростанню або спаданні (реалізація без <algorithm>)
-    void sortArray(bool ascending = true) {
-        if (size == 0) {
-            cout << "Масив порожній, не можна сортувати.\n";
-            return;
-        }
-        // Реалізуємо сортування методом бульбочки
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - 1 - i; j++) {
-                if ((ascending && arr[j] > arr[j + 1]) || (!ascending && arr[j] < arr[j + 1])) {
-                    // Обмін елементів
-                    long temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+    void sortAsc() 
+    {
+        for (int i = 0; i < _size - 1; ++i) 
+        {
+            for (int j = 0; j < _size - i - 1; ++j) 
+            {
+                if (_arr[j] > _arr[j + 1]) 
+                {
+                    long temp = _arr[j];
+                    _arr[j] = _arr[j + 1];
+                    _arr[j + 1] = temp;
                 }
             }
         }
     }
 
-    // Функція для знаходження мінімального значення
-    long min() const {
-        if (size == 0) {
-            cout << "Масив порожній.\n";
-            return -1;  // Повертаємо значення, яке сигналізує про помилку
-        }
-        long minValue = arr[0];
-        for (int i = 1; i < size; i++) {
-            if (arr[i] < minValue) {
-                minValue = arr[i];
+    void sortDesc() 
+    {
+        for (int i = 0; i < _size - 1; ++i) 
+        {
+            for (int j = 0; j < _size - i - 1; ++j) 
+            {
+                if (_arr[j] < _arr[j + 1]) 
+                {
+                    long temp = _arr[j];
+                    _arr[j] = _arr[j + 1];
+                    _arr[j + 1] = temp;
+                }
             }
         }
-        return minValue;
     }
 
-    // Функція для знаходження максимального значення
-    long max() const {
-        if (size == 0) {
-            cout << "Масив порожній.\n";
-            return -1;  // Повертаємо значення, яке сигналізує про помилку
+    long getMinValue() const 
+    {
+        if (_size == 0) 
+        {
+            cout << "Array is empty." << endl;
+            return 0;
         }
-        long maxValue = arr[0];
-        for (int i = 1; i < size; i++) {
-            if (arr[i] > maxValue) {
-                maxValue = arr[i];
-            }
+        long min = _arr[0];
+        for (int i = 1; i < _size; ++i) 
+        {
+            if (_arr[i] < min) min = _arr[i];
         }
-        return maxValue;
+        return min;
     }
 
-    // Функція для знаходження середнього арифметичного
-    double average() const {
-        if (size == 0) {
-            cout << "Масив порожній.\n";
-            return -1;  // Повертаємо значення, яке сигналізує про помилку
+    long getMaxValue() const
+    {
+        if (_size == 0) 
+        {
+            cout << "Array is empty." << endl;
+            return 0;
+        }
+        long max = _arr[0];
+        for (int i = 1; i < _size; ++i) {
+            if (_arr[i] > max) max = _arr[i];
+        }
+        return max;
+    }
+
+    double getAverage() const 
+    {
+        if (_size == 0) 
+        {
+            cout << "Array is empty." << endl;
+            return 0;
         }
         long sum = 0;
-        for (int i = 0; i < size; i++) {
-            sum += arr[i];
+        for (int i = 0; i < _size; ++i) 
+        {
+            sum += _arr[i];
         }
-        return static_cast<double>(sum) / size;
+        return (double) sum / _size;
     }
 
-    // Геттер для розміру масиву
-    int getSize() const {
-        return size;
+    int getSize() const 
+    {
+        return _size;
     }
 };
 
-int main() {
-    Array arr(5);  // Створення масиву з 5 елементів
 
-    arr.fillRandom();  // Заповнення масиву випадковими числами
-    arr.display();  // Виведення вмісту масиву
+int main() 
+{
+    int choice;
+    int initialSize;
 
-    arr.addElement(100);  // Додавання елемента в масив
-    arr.display();
+    cout << "Enter array size: "; cin >> initialSize;
 
-    arr.removeElementByIndex(2);  // Видалення елемента за індексом
-    arr.display();
+    Array arr(initialSize);
 
-    arr.removeElementByValue(100);  // Видалення елемента за значенням
-    arr.display();
+    do {
+        setColor(2);
+        cout << "================= Menu ===================" << endl;
+        cout << "Fill array with random values          [1]" << endl;
+        cout << "Fill array from keyboard               [2]" << endl;
+        cout << "Print array                            [3]" << endl;
+        cout << "Add new element in the end             [4]" << endl;
+        cout << "Remove element by index                [5]" << endl;
+        cout << "Remove element by value                [6]" << endl;
+        cout << "Sort by ascending                      [7]" << endl;
+        cout << "Sort by descending                     [8]" << endl;
+        cout << "Get minimum value                      [9]" << endl;
+        cout << "Get maximum value                      [10]" << endl;
+        cout << "Get average value                      [11]" << endl;
+        cout << "Exit                                   [0]" << endl;
+		cout << "==========================================" << endl;
+        setColor(11);
+        cout << "Enter your choice: "; cin >> choice;
+        setColor(7);
 
-    arr.sortArray();  // Сортування по зростанню
-    arr.display();
+        switch (choice) 
+        {
+        case 1:
+            arr.fillRandom();
+            arr.print();
+            break;
+        case 2:
+            arr.fillFromInput();
+            arr.print();
+            break;
+        case 3:
+            arr.print();
+            break;
+        case 4:
+        {
+            long val;
+            cout << "Enter value to add: ";
+            cin >> val;
+            cout << "Array before adding new value:\t";
+            arr.print();
+            arr.addNewValue(val);
+            cout << "Array after adding new value:\t";
+            arr.print();
+            break;
+        }
+        case 5:
+        {
+            int index;
+            cout << "Enter index to remove: ";
+            cin >> index;
+            cout << "Array before removing by index:\t";
+            arr.print();
+            arr.removeByIndex(index);
+            cout << "Array after removing by index:\t";
+            arr.print();
+            break;
+        }
+        case 6:
+        {
+            long value;
+            cout << "Enter value to remove: ";
+            cin >> value;
+            cout << "Array before removing by value:\t";
+            arr.print();
+            arr.removeByValue(value);
+            cout << "Array after removing by value:\t";
+            arr.print();
+            break;
+        }
+        case 7:
+            cout << "Array before sorting by Asc:\t";
+            arr.print();
+            arr.sortAsc();
+            cout << "Array after sorting by Asc:\t";
+            arr.print();
+            break;
+        case 8:
+            cout << "Array before sorting by Desc:\t";
+            arr.print();
+            arr.sortDesc();
+            cout << "Array after sorting by Desc:\t";
+            arr.print();
+            break;
+        case 9:
+            cout << "Minimum value: " << arr.getMinValue() << endl;
+            break;
+        case 10:
+            cout << "Maximum value: " << arr.getMaxValue() << endl;
+            break;
+        case 11:
+            cout << "Average value: " << arr.getAverage() << endl;
+            break;
+        case 0:
+            cout << "Goodbye!" << endl;
+            break;
+        default:
+            cout << "Invalid choice. Try again!" << endl;
+        }
 
-    cout << "Мінімальне значення: " << arr.min() << endl;
-    cout << "Максимальне значення: " << arr.max() << endl;
-    cout << "Середнє арифметичне: " << arr.average() << endl;
+    } while (choice != 0);
 
-    return 0;
+ 
+
+
+
+
+
+
+
+
+
 }
+

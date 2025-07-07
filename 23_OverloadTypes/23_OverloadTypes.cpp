@@ -16,7 +16,10 @@ private:
     int _passengers;
     int _maxPassengers;
 public:
-    Airplane(const string& m, const string& t, int p, int maxP): _model(m), _type(t), _passengers(p), _maxPassengers(maxP) {}
+    Airplane(const string& m = "", const string& t = "", int p = 0, int maxP = 0)
+        : _model(m), _type(t), _passengers(p), _maxPassengers(maxP) {}
+
+    /*Airplane(const string& m, const string& t, int p, int maxP): _model(m), _type(t), _passengers(p), _maxPassengers(maxP) {}*/
 
     Airplane& operator ++ ()
     {
@@ -69,9 +72,15 @@ public:
 		cout << "Max Passengers:\t" << _maxPassengers << endl;
     }
 
+    operator string() const 
+    {
+        return _model;
+    }
+
     friend bool operator == (const Airplane& a1, const Airplane& a2);
     friend bool operator > (const Airplane& a1, const Airplane& a2);
     friend ostream& operator << (ostream& out, const Airplane& plane);
+    friend istream& operator >> (istream& in, Airplane& plane);
     
 };
 
@@ -92,6 +101,30 @@ ostream& operator << (ostream& out, const Airplane& plane)
     out << "Passengers:\t" << plane._passengers << endl;
     out << "Max Passengers:\t" << plane._maxPassengers << endl;
     return out;
+}
+
+istream& operator >> (istream& in, Airplane& plane) 
+{
+    cout << "Enter model: ";
+    in >> ws;
+    getline(in, plane._model);
+
+    cout << "Enter type: ";
+    getline(in, plane._type);
+
+    cout << "Enter current number of passengers : ";
+    in >> plane._passengers;
+
+    cout << "Enter maximum number of passengers: ";
+    in >> plane._maxPassengers;
+
+    if (plane._passengers > plane._maxPassengers) 
+    {
+        cerr << "Error! Current passengers exceed max! Adjusting to max!!" << endl;
+        plane._passengers = plane._maxPassengers;
+    }
+
+    return in;
 }
 
 
@@ -156,6 +189,18 @@ int main()
     setColor(7);
 
 	a1(30);
+
+    setColor(3);
+    cout << "\t----------Input airplane from keyboard----------\t" << endl;
+    Airplane a5;
+    cin >> a5;
+    cout << endl << "You've entered:" << endl << a5;
+
+    setColor(7);
+
+    setColor(14);
+    cout << "Airplane model as string: " << string(a5) << endl;
+    setColor(7);
 
     
 }

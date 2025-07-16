@@ -1,11 +1,9 @@
 #include "Point.h"
-#include <iostream>
-using namespace std;
 
 
-void Point::Print() const 
+void Point::Print() const
 {
-    cout << "X = " << _x << " " << "Y = " << _y << endl;
+    cout << "(" << _x << ", " << _y << ")";
 }
 
 

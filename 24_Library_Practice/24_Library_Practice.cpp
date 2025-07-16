@@ -1,4 +1,5 @@
-#include "Point.h"
+#include "Vector.h"
+
 
 int main()
 {
@@ -27,7 +28,7 @@ int main()
     difference.Print();
     cout << endl;
 
-    cout << " ------------- Ñomparison P1 and P2 ------------" << endl;
+    cout << " ------------- Comparison P1 and P2 ------------" << endl;
     cout << "p1 < p2: " << ((p1 < p2) ? "True" : "False") << endl;
     cout << "p1 > p2: " << ((p1 > p2) ? "True" : "False") << endl;
     
@@ -45,7 +46,15 @@ int main()
     cout << endl;
     
 
+    cout << "-------------- Vector --------------" << endl;
+    Vector v;
+    v.Add(p1);
+    v.Add(p2);
+    v.Add(Point(0, 0));
 
+    v.Print();
 
 }
+
+
 

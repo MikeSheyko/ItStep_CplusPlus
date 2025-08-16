@@ -23,7 +23,7 @@ private:
     string phone;
     string city;
     string country;
-    string university;
+    string studentUniversity;
     string city_university;
     string country_university;
     string group;
@@ -49,7 +49,7 @@ public:
         phone = "no phone";
         city = "no city";
         country = "no country";
-        university = "no university";
+        studentUniversity = "no university";
         city_university = "no city university";
         country_university = "no country university";
         group = "no group";
@@ -65,7 +65,7 @@ public:
         phone = other.phone;
         city = other.city;
         country = other.country;
-        university = other.university;
+        studentUniversity = other.studentUniversity;
         city_university = other.city_university;
         country_university = other.country_university;
         group = other.group;
@@ -92,7 +92,7 @@ public:
         cout << "Enter phone: "; cin >> phone;
         cout << "Enter city: "; cin >> city;
         cout << "Enter country: "; cin >> country;
-        cout << "Enter university: "; cin >> university;
+        cout << "Enter university: "; cin >> studentUniversity;
         cout << "Enter university city: "; cin >> city_university;
         cout << "Enter university country: "; cin >> country_university;
         cout << "Enter group: "; cin >> group;
@@ -106,7 +106,7 @@ public:
         cout << "Date of Birth: " << birthdate.day << "/" << birthdate.month << "/" << birthdate.year << endl;
         cout << "Phone: " << phone << endl;
         cout << "City: " << city << endl;
-        cout << "University: " << university << endl;
+        cout << "University: " << studentUniversity << endl;
 		cout << "University city: " << city_university << endl;
 		cout << "University country: " << country_university << endl;
         cout << "Group: " << group << endl;
@@ -149,7 +149,7 @@ public:
     }  
     void setUniversity(string university)
     {
-        this->university = university;
+        this->studentUniversity = university;
     }
     void setCityUniversity(string cityUniversity)
     {
@@ -195,7 +195,7 @@ public:
     }
     string getUniversity() const
     {
-        return this->university;
+        return this->studentUniversity;
     }
     string getCityUniversity() const
     {

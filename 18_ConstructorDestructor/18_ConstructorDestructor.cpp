@@ -22,7 +22,7 @@ private:
 	string phone;
 	string city;
 	string country;
-	string university;
+	string studentUniversity;
 	string city_university;
 	string country_university;
 	string group;
@@ -44,7 +44,7 @@ public:
 		phone = "no phone";
 		city = "no city";
 		country = "no country";
-		university = "no university";
+		studentUniversity = "no university";
 		city_university = "no city_university";
 		country_university = "no country_university";
 		group = "no group";
@@ -64,7 +64,7 @@ public:
 		phone = "no phone";
 		city = "no city";
 		country = "no country";
-		university = "no university";
+		studentUniversity = "no university";
 		city_university = "no city_university";
 		country_university = "no country_university";
 		group = "no group";
@@ -84,7 +84,7 @@ public:
 		phone = "no phone";
 		city = "no city";
 		country = "no country";
-		university = "no university";
+		studentUniversity = "no university";
 		city_university = "no city_university";
 		country_university = "no country_university";
 		group = "no group";
@@ -105,7 +105,7 @@ public:
 		this->phone = p;
 		this->city = city;
 		this->country = country;
-		this->university = u;
+		this->studentUniversity = u;
 		this->city_university = ci_u;
 		this->country_university = country_u;
 		this->group = g;
@@ -176,7 +176,7 @@ public:
 		phone = "no phone";
 		city = "no city";
 		country = "no country";
-		university = "no university";
+		studentUniversity = "no university";
 		city_university = "no city_university";
 		country_university = "no country_university";
 		group = "no group";
@@ -193,7 +193,7 @@ public:
 				cout << "Phone : " << phone << endl;
 		cout << "City : " << city << endl;
 		cout << "Country : " << country << endl;
-		cout << "University : " << university << endl;
+		cout << "University : " << studentUniversity << endl;
 		cout << "City University : " << city_university << endl;
 		cout << "Country University : " << country_university << endl;
 		cout << "Group : " << group << endl;

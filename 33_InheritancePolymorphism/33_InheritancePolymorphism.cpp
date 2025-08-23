@@ -1,75 +1,70 @@
+
 #include <iostream>
-using namespace std;
 #include <Windows.h>
-
-
-
-
+using namespace std;
+//virtual override
 class Car
 {
 private:
-    string model;
-	float volume;
-	string typeFuel;
-	int year;
+    string mark;
+    float volume;
+    string type_fuel;
+    int year;
 protected:
-	int speed;
+    int speed;
 public:
-	Car() : model("none"), volume(0.0), typeFuel("none"), year(0), speed(0) {}
-	Car(string m, float v, string tf, int y, int s) : model(m), volume(v), typeFuel(tf), year(y), speed(0) {}
-
+    Car() :mark("none"), volume(0), type_fuel("none"), year(0), speed(0) {}
+    Car(string m, float v, string tf, int y) :mark(m), volume(v), type_fuel(tf),
+        year(y), speed(0) {
+    }
     void setSpeed(int speed)
-	{
-		/*if (speed > 0) 
-		{
-			this->speed = speed;
-		}
-		else
-		{
-			this->speed = 0;
-		}*/
+    {
+        /* if (speed > 0)
+         {
+             this->speed = speed;
+         }
+         else
+         {
+             this->speed = 0;
+         }*/
 
-		this->speed = (speed > 0) ? speed : 0; // Ternary operator for setting speed
-	}
+        this->speed = (speed > 0) ? speed : 0;
 
-	void Print() const
-	{
-		cout << "-------------- Car --------------" << endl;
-		cout << "Model : " << model << endl;
-		cout << "Volume : " << volume << endl;
-		cout << "Type of fuel : " << typeFuel << endl;
-		cout << "Year : " << year << endl;
-		cout << "Speed : " << speed << endl;
-	}
-
-
-	void Drive() const
-	{
-		cout << "I am a Car! I can drive with speed " << speed << " km/h" << endl;
-	}
-    
-
+    }
+    void Print()const
+    {
+        cout << "-----------Car------------------" << endl;
+        cout << "Mark : " << mark << endl;
+        cout << "Volume : " << volume << endl;
+        cout << "Type_fuel : " << type_fuel << endl;
+        cout << "Year : " << year << endl;
+        cout << "Speed : " << speed << endl;
+    }
+    virtual void Drive()const
+    {
+        cout << "I am a Car! I can drive with speed : " << speed << " km/h" << endl;
+    }
 };
-
-
-class PoliceCar : public Car // public, protected, private
+class PoliceCar : public Car//public private protected
 {
-	int soundVolume;
+    int volumeSound;
 public:
-	PoliceCar() :soundVolume(0), Car() {}
-	PoliceCar(string m, float v, string tf, int y, int vol) : soundVolume(vol), Car(m, v, tf, y) {}
-	void Drive() const
-	{
-		cout << "I am a Police Car! I can drive with speed " << speed << " km/h" << endl;
-	}
-	void Print()const
-	{
-		cout << "---------- Police  Car --------------" << endl;
-		Car::Print();
-		cout << "Sound Volume : " << soundVolume << endl;
-	}
-	void BeepBeep()
-	{
+    PoliceCar() :volumeSound(0), Car() {}
+    PoliceCar(string m, float v, string tf, int y, int vol) :volumeSound(vol),
+        Car(m, v, tf, y) {
+    }
+    void Print()const
+    {
+        cout << "----------- Police Car------------------" << endl;
+        Car::Print();
+        cout << "Sound volume " << volumeSound << endl;
+    }
+    void Drive()const
+    {
+        cout << "I am a Police Car! I can drive with speed : " << speed << " km/h" << endl;
+    }
+    void BeepBeep()
+    {
         Beep(330, 100); Sleep(100);
         Beep(330, 100); Sleep(300);
         Beep(330, 100); Sleep(300);
@@ -205,33 +200,63 @@ public:
         Beep(932, 100); Sleep(125);
         Beep(932, 100); Sleep(125);
         Beep(1046, 675);
-		
-	}
+
+
+    }
+
+};
+class SportCar : public Car//public private protected
+{
+    int turbo;
+public:
+    SportCar() :turbo(0), Car() {}
+    SportCar(string m, float v, string tf, int y, int t) :turbo(t),
+        Car(m, v, tf, y) {
+    }
+    void Print()const
+    {
+        cout << "----------- Police Car------------------" << endl;
+        Car::Print();
+        cout << "Turbo speed " << turbo << endl;
+    }
+    void Drive() const override
+    {
+        cout << "I am a Sport Car! I can drive with speed : " << speed << " km/h" << endl;
+    }
+    void NitroSpeed()
+    {
+        cout << "Nitro speed : " << speed + turbo << "km / h" << endl;
+    }
+
 };
 
-
-
-
-
-
+void TestCar(Car& car)
+{
+    car.setSpeed(70);
+    car.Drive();
+}
 int main()
 {
-   
+    Car car("Nissan", 1.5, "gazoline", 2007);
+    car.setSpeed(100);
+    car.Drive();
+    car.Print();
+    cout << endl;
+    PoliceCar p("Prius", 2.0, "hybrid", 2020, 500);
+    //p.BeepBeep();
+    p.setSpeed(250);
+    p.Drive();
+    p.Print();
 
-	Car car("Nissan", 1.5, "Gasoline", 2007);
-	car.setSpeed(100);
-	car.Drive();
-	car.Print();
+    SportCar sport("Formula1", 2.5, "gazoline", 2025, 50);
+    sport.setSpeed(200);
+    sport.Drive();
+    cout << "------------------------------------" << endl;
+    TestCar(car);
+    TestCar(p);
+    TestCar(sport);
 
-	cout << endl;
-
-	PoliceCar p("Toyota", 2.0, "Hybrid", 2020, 500);
-
-	p.setSpeed(150);
-	p.Drive();
-	p.Print();
 
 
 
 }
-

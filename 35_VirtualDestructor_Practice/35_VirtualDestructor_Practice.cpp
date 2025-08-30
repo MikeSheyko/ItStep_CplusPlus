@@ -1,95 +1,163 @@
 #include <iostream>
 using namespace std;
 
-
 class Pizza
 {
+protected:
+    string* ingredients;
+    int ingCount;
+
 public:
+    Pizza(initializer_list<string> list)
+    {
+        ingCount = list.size();
+        ingredients = new string[ingCount];
+        int i = 0;
+        for (const string& ingr : list)
+        {
+            ingredients[i++] = ingr;
+        }
+    }
+
     virtual void CreatePizza() const = 0;
-    virtual ~Pizza() {}
+
+    virtual ~Pizza()
+    {
+        delete[] ingredients;
+    }
 };
 
 class MilanPizza : public Pizza
 {
 public:
+    MilanPizza() : Pizza({ "Parmesan", "Tomatoes" }) {}
+
     void CreatePizza() const override
     {
-        cout << "Cooking Milanese pizza..." << endl;
+        cout << "Cooking Milanese pizza with : ";
+        for (int i = 0; i < ingCount; ++i)
+        {
+            cout << ingredients[i];
+            if (i < ingCount - 1)
+                cout << ", ";
+        }
+        cout << endl;
     }
 };
 
 class GreekPizza : public Pizza
 {
 public:
+    GreekPizza() : Pizza({ "Feta", "Tomatoes" }) {}
+
     void CreatePizza() const override
     {
-        cout << "Cooking Greek pizza..." << endl;
+        cout << "Cooking Greek pizza with : ";
+        for (int i = 0; i < ingCount; ++i)
+        {
+            cout << ingredients[i];
+            if (i < ingCount - 1)
+                cout << ", ";
+        }
+        cout << endl;
     }
 };
 
-
 class Souse
 {
+protected:
+    string* ingredients;
+    int ingredientCount;
+
 public:
+    Souse(initializer_list<string> list)
+    {
+        ingredientCount = list.size();
+        ingredients = new string[ingredientCount];
+        int i = 0;
+        for (const string& ingr : list)
+        {
+            ingredients[i++] = ingr;
+        }
+    }
+
     virtual void CreateSouse() const = 0;
-    virtual ~Souse() {}
+
+    virtual ~Souse()
+    {
+        delete[] ingredients;
+    }
 };
 
 class MilanSouse : public Souse
 {
 public:
+    MilanSouse() : Souse({ "Tomatoes", "Basilic" }) {}
+
     void CreateSouse() const override
     {
-        cout << "Cooking Milan sauce..." << endl;
+        cout << "Cooking Milan sauce with: ";
+        for (int i = 0; i < ingredientCount; ++i)
+        {
+            cout << ingredients[i];
+            if (i < ingredientCount - 1)
+                cout << ", ";
+        }
+        cout << endl;
     }
 };
 
 class GreekSouse : public Souse
 {
 public:
+    GreekSouse() : Souse({ "Yogurt", "Cucumber" }) {}
+
     void CreateSouse() const override
     {
-        cout << "Cooking Greek sauce..." << endl;
+        cout << "Cooking Greek sauce with: ";
+        for (int i = 0; i < ingredientCount; ++i)
+        {
+            cout << ingredients[i];
+            if (i < ingredientCount - 1)
+                cout << ", ";
+        }
+        cout << endl;
     }
 };
-
 
 class Factory
 {
 public:
     virtual Pizza* CreatePizza() = 0;
     virtual Souse* CreateSouse() = 0;
-    virtual ~Factory() {}
+    virtual ~Factory() = default;
 };
 
 class MilanFactory : public Factory
 {
 public:
-    Pizza* CreatePizza() override
-    {
-        return new MilanPizza();
+    Pizza* CreatePizza() override 
+    { 
+        return new MilanPizza(); 
     }
-
-    Souse* CreateSouse() override
+    Souse* CreateSouse() override 
     {
-        return new MilanSouse();
+        return new MilanSouse(); 
     }
 };
 
 class GreekFactory : public Factory
 {
 public:
-    Pizza* CreatePizza() override
-    {
-        return new GreekPizza();
+    Pizza* CreatePizza() override 
+    { 
+        return new GreekPizza(); 
     }
-
-    Souse* CreateSouse() override
-    {
-        return new GreekSouse();
+    Souse* CreateSouse() override 
+    { 
+        return new GreekSouse(); 
     }
 };
-
 
 void Menu()
 {
@@ -108,9 +176,14 @@ int main()
         Menu();
         cin >> choice;
 
+        if (choice == 0) {
+            cout << "Goodbye!!!" << endl;
+            break;
+        }
+
         Factory* factory = nullptr;
 
-        switch (choice) 
+        switch (choice)
         {
         case 1:
             factory = new MilanFactory();
@@ -118,21 +191,18 @@ int main()
         case 2:
             factory = new GreekFactory();
             break;
-        case 0:
-            cout << "Goodbye!!!" << endl;
-            return 0;
         default:
             cout << "Invalid choice!! Try again!!" << endl;
             continue;
         }
 
-        
         Pizza* pizza = factory->CreatePizza();
         Souse* souse = factory->CreateSouse();
 
         cout << "--------------------Your Order--------------------" << endl;
         pizza->CreatePizza();
         souse->CreateSouse();
+        
 
         delete pizza;
         delete souse;
@@ -140,5 +210,5 @@ int main()
 
     } while (true);
 
-    
+    return 0;
 }

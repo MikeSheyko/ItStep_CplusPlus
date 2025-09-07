@@ -117,6 +117,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "37_AgregationComposition", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "37_AgregationComposition_Practice", "37_AgregationComposition_Practice\37_AgregationComposition_Practice.vcxproj", "{AFA9A67C-9598-49F3-BD79-0531BFD2A4BE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "33_InheritancePolymorphism_HW", "33_InheritancePolymorphism_HW\33_InheritancePolymorphism_HW.vcxproj", "{AD5E788C-90CF-4FDD-A239-E73639E40D93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -581,6 +583,14 @@ Global
 		{AFA9A67C-9598-49F3-BD79-0531BFD2A4BE}.Release|x64.Build.0 = Release|x64
 		{AFA9A67C-9598-49F3-BD79-0531BFD2A4BE}.Release|x86.ActiveCfg = Release|Win32
 		{AFA9A67C-9598-49F3-BD79-0531BFD2A4BE}.Release|x86.Build.0 = Release|Win32
+		{AD5E788C-90CF-4FDD-A239-E73639E40D93}.Debug|x64.ActiveCfg = Debug|x64
+		{AD5E788C-90CF-4FDD-A239-E73639E40D93}.Debug|x64.Build.0 = Debug|x64
+		{AD5E788C-90CF-4FDD-A239-E73639E40D93}.Debug|x86.ActiveCfg = Debug|Win32
+		{AD5E788C-90CF-4FDD-A239-E73639E40D93}.Debug|x86.Build.0 = Debug|Win32
+		{AD5E788C-90CF-4FDD-A239-E73639E40D93}.Release|x64.ActiveCfg = Release|x64
+		{AD5E788C-90CF-4FDD-A239-E73639E40D93}.Release|x64.Build.0 = Release|x64
+		{AD5E788C-90CF-4FDD-A239-E73639E40D93}.Release|x86.ActiveCfg = Release|Win32
+		{AD5E788C-90CF-4FDD-A239-E73639E40D93}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -123,18 +123,17 @@ public:
 };
 int main()
 {
-    //Animal an("Tom", "flat", 5);
-    //an.Print();
+    Animal an("Tom", "flat", 5);
+    an.Print();
 
-    //Zoo zoo("Rivne Zoo");
-    //zoo.AddAnimal(an);
-    //zoo.AddAnimal(Animal("Lion","Africa",150));
-    //zoo.AddAnimal(Animal("Turtle","Africa",50));
-    //zoo.AddAnimal(Animal("Elephant","Africa",1500));
-    //zoo.ShowInfo();
+    Zoo zoo("Rivne Zoo");
+    zoo.AddAnimal(an);
+    zoo.AddAnimal(Animal("Lion","Africa",150));
+    zoo.AddAnimal(Animal("Turtle","Africa",50));
+    zoo.AddAnimal(Animal("Elephant","Africa",1500));
+    zoo.ShowInfo();
     ////zoo.SaveToFile();
-    //zoo.SaveToFileBinary();
-    Zoo zoo("Test");
+    zoo.SaveToFileBinary();
     zoo.ReadFromFileBinary();
     //zoo.ReadFromFile();
     zoo.ShowInfo();
